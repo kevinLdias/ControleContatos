@@ -1,0 +1,29 @@
+﻿@model UsuarioModel
+
+<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Olá, @Model.Nome</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+    <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Página Inicial</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Contato" asp-action="Index">Contatos</a>
+        </li>
+        @if (Model.Perfil == ControleContatos.Enums.PerfilEnum.Admin)
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Index">Usuários</a>
+            </li>
+        }
+        <li class="nav-item ms-auto">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Sair">
+                <img src="https://imgs.search.brave.com/PWTx_6KLa5XY-qJ9PgLRF8MRILUGobcVHEgUBYPv8P4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuaWNvbi1pY29u/cy5jb20vMzcvUE5H/LzUxMi9sb2dvdXRf/MzYyMi5wbmc"
+                     alt="Sair" width="25" style="margin-right:1px;" title="LogOut">
+            </a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,67 @@
+﻿@model ICollection<ContatoModel>
+
+@{
+    ViewData["Title"] = "Listagem de Contatos";
+}
+
+<div class="text-center">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a role="button" class="btn btn-success" asp-action="Criar">Cadastrar novo contato</a>
+    </div>
+    <br />
+
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
+            @TempData["MensagemErro"]
+        </div>
+    }
+
+    <br />
+
+    <h6 class="display-4 text-primary fw-bold">Listagem de contatos</h6>
+
+    <table class="table" id="myTableContatos">
+
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Celular</th>
+                <th scope="col" class="text-center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var contato in Model)
+                {
+                    <tr>
+                        <td scope="row">@contato.Id</td>
+                        <td>@contato.Nome</td>
+                        <td>@contato.Email</td>
+                        <td>@contato.Numero</td>
+                        <td>
+                            <a role="button" class="btn btn-primary" asp-route-id="@contato.Id" asp-action="Editar">Editar</a>
+                            <a role="button" class="btn btn-danger" asp-route-id="@contato.Id" asp-action="Excluir">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td valign="top" colspan="5">Nenhum contato encontrado</td></tr>
+            }
+        </tbody>
+    </table>
+</div>
