@@ -91,5 +91,33 @@ namespace ControleContatos.Repositorio
 
             return usuarioAtt;
         }
+        public UsuarioModel AlterarSenha(AlterarSenhaModel usuario)
+        {
+            UsuarioModel usuarioAtt = ListarPorId(usuario.Id);
+
+            if(usuario == null) 
+            {
+                throw new Exception("Houve um erro na alteração da senha. Usúario não encontrado!");
+            }
+
+            if(!usuarioAtt.SenhaValida(usuario.SenhaAtual)) 
+            {
+                throw new Exception("Senha atual não confere");
+            }
+
+            if(usuarioAtt.SenhaValida(usuario.NovaSenha))
+            {
+                throw new Exception("Nova senha deve ser diferente da atual");
+            }
+
+            usuarioAtt.SetNovaSenha(usuario.NovaSenha);
+
+            usuarioAtt.Atualizacao = DateTime.Now;
+
+            _bancoContext.SaveChanges();
+
+            return usuarioAtt;
+
+        }
     }
 }

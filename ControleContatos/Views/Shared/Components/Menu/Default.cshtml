@@ -19,11 +19,16 @@
                 <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Index">Usuários</a>
             </li>
         }
-        <li class="nav-item ms-auto">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Sair">
-                <img src="https://imgs.search.brave.com/PWTx_6KLa5XY-qJ9PgLRF8MRILUGobcVHEgUBYPv8P4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuaWNvbi1pY29u/cy5jb20vMzcvUE5H/LzUxMi9sb2dvdXRf/MzYyMi5wbmc"
-                     alt="Sair" width="25" style="margin-right:1px;" title="LogOut">
-            </a>
-        </li>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-controller="AlterarSenha" asp-action="Index">Alterar senha</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-controller="Login" asp-action="Sair">
+                    <img src="https://imgs.search.brave.com/PWTx_6KLa5XY-qJ9PgLRF8MRILUGobcVHEgUBYPv8P4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuaWNvbi1pY29u/cy5jb20vMzcvUE5H/LzUxMi9sb2dvdXRf/MzYyMi5wbmc"
+                         alt="Sair" width="25" style="margin-right:1px;" title="LogOut">
+                </a>
+            </li>
+        </ul>
     </ul>
 </div>

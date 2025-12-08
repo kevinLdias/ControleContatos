@@ -11,8 +11,8 @@ namespace ControleContatos.Repositorio
         UsuarioModel Adicionar(UsuarioModel usuario);
         bool Deletar(int id);
         UsuarioModel Editar(UsuarioModel usuario);
-
         UsuarioModel RedefinirSenha(UsuarioModel usuario);
+        UsuarioModel AlterarSenha(AlterarSenhaModel usuario);
 
     }
 }
