@@ -1,4 +1,5 @@
 ﻿using ControleContatos.Filters;
+using ControleContatos.Helper;
 using ControleContatos.Models;
 using ControleContatos.Repositorio;
 using Microsoft.AspNetCore.Mvc;
@@ -9,14 +10,17 @@ namespace ControleContatos.Controllers
     public class ContatoController : Controller
     {
         private readonly IContatoRepositorio _contatoRepositorio;
+        private readonly ISessao _sessao;
 
-        public ContatoController(IContatoRepositorio contatoRepositorio)
+        public ContatoController(IContatoRepositorio contatoRepositorio, ISessao sessao)
         {
             _contatoRepositorio = contatoRepositorio;
+            _sessao = sessao;
         }
         public IActionResult Index()
         {
-            var contatos = _contatoRepositorio.ListarTodos();
+            UsuarioModel usuarioLogado = _sessao.BuscarSessaoDoUsuario();
+            var contatos = _contatoRepositorio.ListarTodos(usuarioLogado.Id);
             return View(contatos);
         }
         public IActionResult Criar()
@@ -41,6 +45,8 @@ namespace ControleContatos.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    UsuarioModel usuarioLogado = _sessao.BuscarSessaoDoUsuario();
+                    contato.UsuarioId = usuarioLogado.Id;
                     _contatoRepositorio.Adicionar(contato);
                     TempData["MensagemSucesso"] = "Contato cadastrado com sucesso!";
                     return RedirectToAction("Index");
@@ -58,8 +64,11 @@ namespace ControleContatos.Controllers
         {
             try
             {
+
                 if (ModelState.IsValid)
                 {
+                    UsuarioModel usuarioLogado = _sessao.BuscarSessaoDoUsuario();
+                    contato.UsuarioId = usuarioLogado.Id;
                     _contatoRepositorio.Editar(contato);
                     TempData["MensagemSucesso"] = "Contato alterado com sucesso!";
                     return RedirectToAction("Index");
@@ -78,7 +87,7 @@ namespace ControleContatos.Controllers
             {
                 bool apagado = _contatoRepositorio.Deletar(id);
 
-                if(apagado)
+                if (apagado)
                 {
                     TempData["MensagemSucesso"] = "Contato excluido com sucesso!";
                 }
@@ -89,7 +98,7 @@ namespace ControleContatos.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 TempData["MensagemErro"] = $"Erro ao tentar excluir o contato... detalhes do erro: {ex.Message}";
                 return RedirectToAction("Index");

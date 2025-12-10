@@ -13,9 +13,9 @@ namespace ControleContatos.Repositorio
             _bancoContext = bancoContext;
         }
 
-        public ICollection<ContatoModel> ListarTodos()
+        public ICollection<ContatoModel> ListarTodos(int usuarioId)
         {
-            return _bancoContext.Contatos.ToList();
+            return _bancoContext.Contatos.Where(x => x.UsuarioId == usuarioId).ToList();
         }
 
         public ContatoModel ListarPorId(int id)

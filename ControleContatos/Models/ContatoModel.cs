@@ -14,5 +14,7 @@ namespace ControleContatos.Models
         [Required(ErrorMessage = "É necessário informar o número do contato"),
             Phone(ErrorMessage = "Formato do número incorreto"), MaxLength(128)]
         public string Numero { get; set; }
+        public int? UsuarioId { get; set; }
+        public UsuarioModel? Usuario { get; set; }
     }
 }

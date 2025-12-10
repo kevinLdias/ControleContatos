@@ -1,6 +1,7 @@
 ﻿using ControleContatos.Enums;
 using ControleContatos.Helper;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection.Metadata;
 using System.Security.Cryptography;
 
@@ -23,6 +24,8 @@ namespace ControleContatos.Models
         public string Senha { get; set; }
         public DateTime DataCadastro { get; set; }
         public DateTime? Atualizacao { get; set; }
+
+        public virtual List<ContatoModel> Contatos { get; set; }
 
         public bool SenhaValida(string senha)
         {
