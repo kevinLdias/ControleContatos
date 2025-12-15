@@ -1,5 +1,6 @@
 ﻿using ControleContatos.Data;
 using ControleContatos.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ControleContatos.Repositorio
 {
@@ -15,7 +16,7 @@ namespace ControleContatos.Repositorio
 
         public ICollection<UsuarioModel> ListarTodos()
         {
-            return _bancoContext.Usuarios.ToList();
+            return _bancoContext.Usuarios.Include(x => x.Contatos).ToList();
         }
 
         public UsuarioModel BuscarPorLogin(string login)

@@ -5,6 +5,27 @@
 getDatatable('#myTableContatos');
 getDatatable('#myTableUsuarios');
 
+$(document).on('click', '.btn-total-contatos', function () {
+    var usuarioId = $(this).data('usuario-id');
+
+    $.ajax({
+        type: 'GET',
+        url: '/Usuario/ListarContatosPorUsuarioId?usuarioId=' + usuarioId,
+        success: function (result) {
+            $("#ListaContatosUsuario").html(result);
+            getDatatable('#table-contatos-usuario');
+
+            var modal = new bootstrap.Modal(
+                document.getElementById('modalContatosUsuario')
+            );
+            modal.show();
+        }
+    });
+});
+
+
+
+
 function getDatatable(id) {
     new DataTable(id, {
         ordering: true,
